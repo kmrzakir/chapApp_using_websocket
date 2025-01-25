@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat App</title>
+
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      body {
+        width: 100%;
+        height: 100vh;
+        background-color: rgb(188, 151, 107);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      .screen {
+        width: 300px;
+        height: 600px;
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+      }
+      .message-box {
+        width: 100%;
+        height: 95%;
+        background-color: rgb(183, 194, 204);
+        overflow-y: scroll;
+        scroll-behavior: smooth;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        row-gap: 8px;
+      }
+      /* hides the scroll barr */
+      .message-box::-webkit-scrollbar {
+        display: none; /* For Chrome, Safari, and Edge */
+      }
+      .send_message_div {
+        width: 100%;
+        height: 8%;
+        background-color: white;
+        display: flex;
+        justify-content: space-between;
+        padding: 4px;
+        column-gap: 5px;
+      }
+      input {
+        width: 100%;
+        border: none;
+        outline: none;
+        border-radius: 10px;
+        padding-left: 20px;
+        box-shadow: 0px 0px 2px 0px black;
+      }
+      button {
+        width: 40px;
+        height: 40px;
+        padding: 6px;
+        border-radius: 50%;
+        align-content: center;
+        border: none;
+        background-color: aquamarine;
+      }
+      .my_message {
+        min-width: 100px;
+        color: rgb(255, 247, 247);
+        align-self: flex-end;
+        background-color: rgb(11, 11, 11);
+        padding: 5px 10px;
+        border-radius: 10px 0px 10px 10px;
+      }
+      .other_message {
+        min-width: 100px;
+        color: rgb(0, 0, 0);
+        align-self: flex-start;
+        background-color: rgb(255, 255, 255);
+        padding: 5px 10px;
+        border-radius: 0px 10px 10px 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="screen">
+      <!-- Messages display area -->
+      <div id="message-box" class="message-box"></div>
+
+      <!-- send message area -->
+      <div class="send_message_div">
+        <input type="text" placeholder="Enter a message" id="message-input" />
+        <button class="send_btn" id="send-button">Send</button>
+      </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const socket = io();
+
+      const sendBtn = document.getElementById("send-button");
+      const inputField = document.getElementById("message-input");
+      const message_box = document.getElementById("message-box");
+
+      sendBtn.addEventListener("click", (e) => {
+        // cretae a p tag
+        const myTag = document.createElement("p");
+        myTag.classList.add("my_message");
+
+        if (inputField.value != "") {
+          // send a message to the server
+          socket.emit("clent message", inputField.value);
+          myTag.textContent = inputField.value;
+          message_box.appendChild(myTag);
+          inputField.value = "";
+        } else {
+          alert("please enter a message");
+        }
+      });
+
+      // read the message send from the server
+      socket.on("server message", (msg) => {
+        // message_box.innerHTML = msg;
+        const otherTag = document.createElement("p");
+        otherTag.classList.add("other_message");
+
+        otherTag.textContent = msg;
+        message_box.appendChild(otherTag);
+      });
+    </script>
+  </body>
+</html>

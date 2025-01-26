@@ -1,0 +1,75 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+:root {
+  --bg-color: #fffbca;
+  --primary-color: #aeea94;
+  --secondary-color: #b771e5;
+  --third-color: #4635b1;
+}
+body {
+  width: 100%;
+  height: 100vh;
+  background-color: var(--bg-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.screen {
+  width: 300px;
+  height: 80%;
+  border-radius: 10px;
+  background-color: var(--primary-color);
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  row-gap: 10px;
+}
+.message-box {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  background-color: white;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+.send_message_div {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  column-gap: 6px;
+  align-items: center;
+}
+.send_message_div > input {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+}
+.send_message_div > img {
+  width: 30px;
+  height: 30px;
+}
+.my_message {
+  min-width: 100px;
+  color: rgb(255, 247, 247);
+  align-self: flex-end;
+  background-color: rgb(11, 11, 11);
+  padding: 5px 10px;
+  border-radius: 10px 0px 10px 10px;
+}
+.other_message {
+  min-width: 100px;
+  color: rgb(0, 0, 0);
+  align-self: flex-start;
+  background-color: rgb(223, 220, 21);
+  padding: 5px 10px;
+  border-radius: 0px 10px 10px 10px;
+}

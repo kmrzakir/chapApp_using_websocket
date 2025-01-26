@@ -3,9 +3,15 @@ const { createServer } = require("node:http");
 const { join } = require("node:path");
 const { Server } = require("socket.io");
 
+const path = require("path");
+
 const app = express();
 const server = createServer(app);
 const io = new Server(server);
+
+// Serve static files (CSS, JS, images) from the 'public' folder
+// app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname)));
 
 app.get("/", (req, res) => {
   res.sendFile(join(__dirname, "index.html"));

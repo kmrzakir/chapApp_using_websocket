@@ -37,6 +37,7 @@ body {
   padding: 10px;
   display: flex;
   flex-direction: column;
+  row-gap: 10px;
 }
 .send_message_div {
   width: 100%;

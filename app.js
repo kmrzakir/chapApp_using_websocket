@@ -10,7 +10,6 @@ const server = createServer(app);
 const io = new Server(server);
 
 // Serve static files (CSS, JS, images) from the 'public' folder
-// app.use(express.static(path.join(__dirname, "public")));
 app.use(express.static(path.join(__dirname)));
 
 app.get("/", (req, res) => {
